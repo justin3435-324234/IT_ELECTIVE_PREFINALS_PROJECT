@@ -23,4 +23,18 @@ public class TicketsController : Controller
             .ToListAsync();
         return View(tickets);
     }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var ticket = await _context.Tickets
+            .Include(t => t.Customer)
+            .Include(t => t.Category)
+            .Include(t => t.Priority)
+            .Include(t => t.Status)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (ticket == null) return NotFound();
+
+        return View(ticket);
+    }
 }
