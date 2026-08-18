@@ -1,7 +1,2 @@
-# Database Schema Overview
-
-## Core System Tables
-- **Departments**: Primary Key `Id`
-- **Employees**: Primary Key `Id`, Foreign Key `DepartmentId` -> `Departments(Id)`
-- **Teams**: Primary Key `Id`, Foreign Key `DepartmentId` -> `Departments(Id)`
-- **TeamMembers**: Composite Primary Key (`TeamId`, `EmployeeId`)
+# Database Schema Overview## Core System Tables- **Departments**: Primary Key `Id`- **Employees**: Primary Key `Id`, Foreign Key `DepartmentId` -> `Departments(Id)`- **Teams**: Primary Key `Id`, Foreign Key `DepartmentId` -> `Departments(Id)`- **TeamMembers**: Composite Primary Key (`TeamId`, `EmployeeId`)
+## Ticket & Customer System Tables- **Customers**: Primary Key `Id`- **TicketCategories**: Primary Key `Id`, Self-Referencing Foreign Key `ParentCategoryId` -> `TicketCategories(Id)`- **TicketPriorities**: Primary Key `Id`- **TicketStatuses**: Primary Key `Id`- **Tickets**: Primary Key `Id`, Foreign Keys: `CustomerId`, `CategoryId`, `PriorityId`, `StatusId`- **TicketAssignments**: Composite Primary Key (`TicketId`, `EmployeeId`)- **TicketComments**: Primary Key `Id`, Foreign Keys: `TicketId`, `EmployeeId`- **Tags**: Primary Key `Id`- **TicketTags**: Composite Primary Key (`TicketId`, `TagId`)- **TicketAttachments**: Primary Key `Id`, Foreign Key `TicketId` -> `Tickets(Id)`
