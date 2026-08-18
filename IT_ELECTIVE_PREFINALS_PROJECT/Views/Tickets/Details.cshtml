@@ -9,4 +9,50 @@
         <p><strong>Created:</strong> @Model.CreatedAt | <strong>Due:</strong> @Model.DueAt</p>
         <p>@Model.Description</p>
     </div>
+</div>@model IT_ELECTIVE_PREFINALS_PROJECT.Models.Ticket
+
+<h2>Ticket #@Model.Id - @Model.Subject</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>Customer: @Model.Customer.CompanyName (@Model.Customer.ContactName)</h5>
+        <p><strong>Category:</strong> @Model.Category.Name | <strong>Priority:</strong> @Model.Priority.Name | <strong>Status:</strong> @Model.Status.Name</p>
+        <p><strong>Created:</strong> @Model.CreatedAt | <strong>Due:</strong> @Model.DueAt</p>
+        <p>@Model.Description</p>
+    </div>
 </div>
+
+<h4>Assignments</h4>
+<ul>
+    @foreach (var a in Model.TicketAssignments)
+    {
+        <li>@a.Employee.FullName (@(a.IsPrimary == 1 ? "Primary" : "Secondary")) - Assigned: @a.AssignedAt @(a.UnassignedAt != null ? $"[Unassigned: {a.UnassignedAt}]" : "")</li>
+    }
+</ul>
+
+<h4>Comments</h4>
+<div>
+    @foreach (var c in Model.TicketComments)
+    {
+        <div class="border p-2 mb-2">
+            <small>@(c.Employee != null ? c.Employee.FullName : "Customer") at @c.CreatedAt @(c.IsInternal == 1 ? "[INTERNAL]" : "")</small>
+            <p>@c.Comment</p>
+        </div>
+    }
+</div>
+
+<h4>Tags</h4>
+<p>
+    @foreach (var tag in Model.TicketTags)
+    {
+        <span class="badge bg-secondary">@tag.Tag.Name</span>
+    }
+</p>
+
+<h4>Attachments</h4>
+<ul>
+    @foreach (var att in Model.TicketAttachments)
+    {
+        <li>@att.FileName (@att.ContentType, @att.FileSize bytes)</li>
+    }
+</ul>
