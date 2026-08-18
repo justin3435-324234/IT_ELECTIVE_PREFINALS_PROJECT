@@ -19,7 +19,50 @@ public class TicketsController : Controller
             .Include(t => t.Customer)
             .Include(t => t.Category)
             .Include(t => t.Priority)
+      using IT_ELECTIVE_PREFINALS_PROJECT.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace IT_ELECTIVE_PREFINALS_PROJECT.Controllers;
+
+public class TicketsController : Controller
+{
+    private readonly AppDbContext _context;
+
+    public TicketsController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var tickets = await _context.Tickets
+            .Include(t => t.Customer)
+            .Include(t => t.Category)
+            .Include(t => t.Priority)
             .Include(t => t.Status)
+            .ToListAsync();
+        return View(tickets);
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var ticket = await _context.Tickets
+            .Include(t => t.Customer)
+            .Include(t => t.Category)
+            .Include(t => t.Priority)
+            .Include(t => t.Status)
+            .Include(t => t.TicketAssignments).ThenInclude(ta => ta.Employee)
+            .Include(t => t.TicketComments).ThenInclude(tc => tc.Employee)
+            .Include(t => t.TicketTags).ThenInclude(tt => tt.Tag)
+            .Include(t => t.TicketAttachments)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (ticket == null) return NotFound();
+
+        return View(ticket);
+    }
+}      .Include(t => t.Status)
             .ToListAsync();
         return View(tickets);
     }
