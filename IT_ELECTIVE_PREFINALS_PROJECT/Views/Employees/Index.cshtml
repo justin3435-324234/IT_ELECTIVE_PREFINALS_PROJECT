@@ -1,0 +1,28 @@
+@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.Employee>
+
+<h2>Employees</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Job Title</th>
+            <th>Department</th>
+            <th>Hire Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Id</td>
+                <td>@emp.FullName</td>
+                <td>@emp.Email</td>
+                <td>@emp.JobTitle</td>
+                <td>@emp.Department.Name</td>
+                <td>@emp.HireDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
