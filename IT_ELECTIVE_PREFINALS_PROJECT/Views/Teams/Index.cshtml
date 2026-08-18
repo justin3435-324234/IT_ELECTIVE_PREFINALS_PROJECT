@@ -1,0 +1,24 @@
+@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.Team>
+
+<h2>Teams</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Total Members</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.Name</td>
+                <td>@team.Description</td>
+                <td>@team.Department.Name</td>
+                <td>@team.TeamMembers.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
