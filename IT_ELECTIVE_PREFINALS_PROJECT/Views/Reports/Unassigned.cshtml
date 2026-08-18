@@ -1,0 +1,24 @@
+﻿@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.Ticket>
+@{
+    ViewData["Title"] = "Unassigned Tickets";
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Unassigned Tickets</h2><a asp-action="Index" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a></div><hr />
+    @if (!Model.Any())
+    {
+        <div class="alert alert-success">All tickets are currently assigned!</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-warning"><tr><th>Ticket ID</th><th>Subject</th><th>Customer</th><th>Category</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    @foreach (var ticket in Model)
+                    {
+                        <tr><td>#@ticket.Id</td><td><strong>@ticket.Subject</strong></td><td>@(ticket.Customer?.CompanyName ?? "N/A")</td><td>@(ticket.Category?.Name ?? "N/A")</td><td><span class="badge bg-secondary">@(ticket.Priority?.Name ?? "N/A")</span></td><td><span class="badge bg-warning text-dark">@(ticket.Status?.Name ?? "Unassigned")</span></td><td><a asp-controller="Tickets" asp-action="Details" asp-route-id="@ticket.Id" class="btn btn-sm btn-primary">View Details</a></td></tr>
+                    }
+                </tbody>        </table>
+            </div>
+        }
+    </div>

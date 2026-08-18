@@ -34,4 +34,17 @@ public class ReportsController : Controller
 
         return View(workload);
     }
+
+    public async Task<IActionResult> Unassigned()
+    {
+        var unassignedTickets = await _context.Tickets
+            .Include(t => t.Customer)
+            .Include(t => t.Category)
+            .Include(t => t.Priority)
+            .Include(t => t.Status)
+            .Where(t => !t.TicketAssignments.Any())
+            .ToListAsync();
+
+        return View(unassignedTickets);
+    }
 }
