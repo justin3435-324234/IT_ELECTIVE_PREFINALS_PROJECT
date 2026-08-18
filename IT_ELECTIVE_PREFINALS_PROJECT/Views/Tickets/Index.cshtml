@@ -1,0 +1,32 @@
+@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.Ticket>
+
+<h2>Tickets</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Customer</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>#@ticket.Id</td>
+                <td>@ticket.Subject</td>
+                <td>@ticket.Customer.CompanyName</td>
+                <td>@ticket.Category.Name</td>
+                <td>@ticket.Priority.Name</td>
+                <td>@ticket.Status.Name</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@ticket.Id" class="btn btn-sm btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
