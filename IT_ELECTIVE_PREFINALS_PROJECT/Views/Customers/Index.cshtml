@@ -1,0 +1,26 @@
+@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.Customer>
+
+<h2>Customers</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Contact Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>@cust.CompanyName</td>
+                <td>@cust.ContactName</td>
+                <td>@cust.Email</td>
+                <td>@cust.Phone</td>
+                <td>@cust.CreatedAt</td>
+            </tr>
+        }
+    </tbody>
+</table>
