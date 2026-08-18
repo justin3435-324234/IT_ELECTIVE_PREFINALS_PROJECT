@@ -1,0 +1,2 @@
+﻿# Pre-Finals Project Submission Verification- **Course**: IT ELECTIVE 1- **Section**: BSIT - 22A1- **Database Engine**: SQLite (`lycevm.db`)- **Target Framework**: .NET 8.0 ASP.NET Core MVC
+## Pre-Flight Checklist- [x] Database connection string verified (`Data Source=lycevm.db`).- [x] All 30 Pull Requests merged into `main` without merge conflicts.- [x] Solution builds cleanly with zero compiler errors (`dotnet build --configuration Release`).- [x] All report views, navigation controllers, and EF Core queries verified operational.
