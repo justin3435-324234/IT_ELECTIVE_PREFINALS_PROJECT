@@ -1,0 +1,38 @@
+﻿@model IEnumerable<IT_ELECTIVE_PREFINALS_PROJECT.Models.TicketCategory>
+@{
+    ViewData["Title"] = "Category Hierarchy Report";
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Category Hierarchy & Breakdown</h2><a asp-action="Index" class="btn btn-secondary btn-sm">&larr; Back to Dashboard</a></div><hr /><div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-dark"><tr><th>Category Name</th><th>Total Tickets</th><th>Ticket List</th></tr></thead>
+        <tbody>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td><strong>@cat.Name</strong></td>
+                    <td><span class="badge bg-info text-dark fs-6">@cat.Tickets.Count</span></td>
+                    <td>
+                        @if (cat.Tickets.Any())
+                        {
+                            <ul class="mb-0 ps-3">
+                                @foreach (var ticket in cat.Tickets)
+                                {
+                                    <li>
+                                        <a asp-controller="Tickets" asp-action="Details" asp-route-id="@ticket.Id">
+                                            #@ticket.Id - @ticket.Subject
+                                        </a><span class="badge bg-light text-dark ms-2">@(ticket.Status?.Name ?? "Pending")</span>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No tickets under this category</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>        </table>
+    </div>
+</div>
