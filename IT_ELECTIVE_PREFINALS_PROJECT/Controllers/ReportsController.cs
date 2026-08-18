@@ -22,4 +22,16 @@ public class ReportsController : Controller
 
         return View();
     }
+
+    public async Task<IActionResult> Workload()
+    {
+        var workload = await _context.Employees
+            .Include(e => e.Department)
+            .Include(e => e.TicketAssignments)
+                .ThenInclude(ta => ta.Ticket)
+                    .ThenInclude(t => t.Status)
+            .ToListAsync();
+
+        return View(workload);
+    }
 }
