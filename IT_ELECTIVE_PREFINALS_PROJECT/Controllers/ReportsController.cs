@@ -47,4 +47,14 @@ public class ReportsController : Controller
 
         return View(unassignedTickets);
     }
+
+    public async Task<IActionResult> CategoryHierarchy()
+    {
+        var categories = await _context.TicketCategories
+            .Include(c => c.Tickets)
+                .ThenInclude(t => t.Status)
+            .ToListAsync();
+
+        return View(categories);
+    }
 }
